@@ -12,7 +12,7 @@ M_G1O1_M      O33
 [...]
 ```
 
-The first column contains the **mapping names** for each atom in a lipid. It has been designed to unambiguously refer to each atom in a lipid starting from the 3 carbons in the glycerol (names `M_G1_M`, `M_G2_M` and `M_G1_M`). The second column contains atom names which are found in a pdb structure and are thus force field dependant.
+The first column contains the **mapping names** for each atom in a lipid. It has been designed to unambiguously refer to each atom in a lipid starting from the 3 carbons in the glycerol (names `M_G1_M`, `M_G2_M` and `M_G3_M`). The second column contains atom names which are found in a pdb structure and are thus force field dependant.
 
 The .def file looks like this :
 
