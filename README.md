@@ -98,6 +98,19 @@ All graph features and algorithms come from the [networkx module](https://networ
 
 - So far the different Hs of each CH2 are not classified in pro-R / pro-S. Implementing this feature is planned.
 - Sometimes there are ambiguities which autoLipMap cannot solve. For example, in a CH3, it cannot distinguish which H is H1, H2 or H3. Same things for the two oxygens connected to the phoshorous (which are not part of the main chain). Same thing for each CH3 group of the choline. In general, it doesn't really matter since we are not very interested in those hydrogens (or atoms).
+- In the mapping file, the last lines (containing info on #Water and #Whole molecules) cannot be guessed automatically by autoLipMap. Thus, one should edit and fix them manually for now. Here is an example:
+
+```
+#Water
+M_OW_M           OW
+M_HW1_M          HW1
+M_HW2_M          HW2
+#Whole molecules
+M_POPC_M         POPC
+M_NA_M           NA
+M_CHOL_M         CHO
+M_SOL_M          SOL
+```
 
 ## Contributors
 
