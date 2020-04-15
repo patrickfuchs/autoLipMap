@@ -63,9 +63,14 @@ The program also needs a file `lipids_info.py` which is used as a module. This l
 ## Example
 
 ```
-python ./autoLipMap.py --pdb 1POPC_OK.pdb -l POPC -op automatic_mappingPOPCcharmm36.txt -od automatic_POPCcharmm36.def --graph
+python ./autoLipMap.py --pdb 1POPC_OK.pdb -l POPC \
+    -op automatic_mappingPOPCcharmm36.txt \
+    -od automatic_POPCcharmm36.def \
+    --graph
 
 ```
+
+The `--graph` is optional. If on, autoLipMap generates graph pictures using matplotlib and networkx (see below). Note, it is possible to zoom in on different regions of the generated graph.
 
 ## Principle
 
@@ -85,6 +90,6 @@ Again, if we zoom in on the glycerol region it gets clearer:
 
 ![](pdb_graph_zoomed.png)
 
-Then, using [graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism), autoLipMap can check if the mapping and pdb graphs match and deduce the mapping between mapping names and pdb names.
+Then, using [graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism), autoLipMap can check if the mapping and pdb graphs match and deduce the mapping between mapping names and pdb names. With this information, it writes a mapping file and a def file.
 
 All graph features and algorithms come from the [networkx module](https://networkx.github.io/).
