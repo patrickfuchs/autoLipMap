@@ -41,7 +41,7 @@ autoLipMap  is written in Python 3 and need the following modules :
 
 ```
 $ python ./autoLipMap.py -h
-usage: autoLipMap.py [-h] -p PDB -l LIPID -op OMAP -od ODEF [--graph]
+usage: autoLipMap.py [-h] -p PDB -l LIPID -om OMAP -od ODEF [--graph]
 
 This program generates a mapping file and a .def file from a pdb file
 containing one lipid only.
@@ -51,7 +51,7 @@ optional arguments:
   -p PDB, --pdb PDB     pdb file containing a single lipid.
   -l LIPID, --lipid LIPID
                         Name of lipid (e.g. POPC).
-  -op OMAP, --omap OMAP
+  -om OMAP, --omap OMAP
                         Output mapping file name.
   -od ODEF, --odef ODEF
                         Output .def file name.
@@ -64,7 +64,7 @@ The program also needs a file `lipids_info.py` which is used as a module. This l
 
 ```
 python ./autoLipMap.py --pdb 1POPC_charmm36.pdb -l POPC \
-    -op automatic_mappingPOPCcharmm36.txt \
+    -om automatic_mappingPOPCcharmm36.txt \
     -od automatic_POPCcharmm36.def \
     --graph
 

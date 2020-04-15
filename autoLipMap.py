@@ -195,7 +195,7 @@ if __name__ == "__main__":
                         help="pdb file containing a single lipid.")
     parser.add_argument("-l", "--lipid", required=True, type=str,
                         help="Name of lipid (e.g. POPC).")
-    parser.add_argument("-op", "--omap", required=True, type=str,
+    parser.add_argument("-om", "--omap", required=True, type=str,
                         help="Output mapping file name.")
     parser.add_argument("-od", "--odef", required=True, type=str,
                         help="Output .def file name.")
