@@ -63,7 +63,7 @@ The program also needs a file `lipids_info.py` which is used as a module. This l
 ## Example
 
 ```
-python ./autoLipMap.py --pdb 1POPC_OK.pdb -l POPC \
+python ./autoLipMap.py --pdb 1POPC_charmm36.pdb -l POPC \
     -op automatic_mappingPOPCcharmm36.txt \
     -od automatic_POPCcharmm36.def \
     --graph
@@ -93,6 +93,11 @@ Again, if we zoom in on the glycerol region it gets clearer:
 Then, using [graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism), autoLipMap can check if the mapping and pdb graphs match and deduce the mapping between mapping names and pdb names. With this information, it writes a mapping file and a def file.
 
 All graph features and algorithms come from the [networkx module](https://networkx.github.io/).
+
+## Known issues
+
+- So far the different Hs of each CH2 are not classified in pro-R / pro-S. Implementing this feature is planned.
+- Sometimes there are ambiguities which autoLipMap cannot solve. For example, in a CH3, it cannot distinguish which H is H1, H2 or H3. Same things for the two oxygens connected to the phoshorous (which are not part of the main chain). Same thing for each CH3 group of the choline. In general, it doesn't really matter since we are not very interested in those hydrogens (or atoms).
 
 ## Contributors
 
