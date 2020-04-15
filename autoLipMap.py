@@ -212,7 +212,7 @@ if __name__ == "__main__":
     # In the following: MN = mapping name, PN = pdb name, GN = generic name.
     #############################
     # 1) Build graph G_MN with names from mapping file.
-    # This graph is built from a dictionnary (dic_lipids.py)
+    # This graph is built from a dictionnary (lipids_info.py)
     #############################
     G_MN = nx.Graph()
     G_MN.add_nodes_from(list_atoms_MN)

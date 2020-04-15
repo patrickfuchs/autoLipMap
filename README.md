@@ -93,3 +93,11 @@ Again, if we zoom in on the glycerol region it gets clearer:
 Then, using [graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism), autoLipMap can check if the mapping and pdb graphs match and deduce the mapping between mapping names and pdb names. With this information, it writes a mapping file and a def file.
 
 All graph features and algorithms come from the [networkx module](https://networkx.github.io/).
+
+## Contributors
+
+- Patrick Fuchs
+
+## License
+
+buildH is licensed under the [BSD License](LICENSE).
