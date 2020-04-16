@@ -12,9 +12,9 @@ M_G1O1_M      O33
 [...]
 ```
 
-The first column contains the **mapping names** for each atom in a lipid. It has been designed to unambiguously refer to each atom in a lipid starting from the 3 carbons in the glycerol (names `M_G1_M`, `M_G2_M` and `M_G3_M`). The second column contains atom names which are found in a pdb structure and are thus force field dependant.
+The first column contains the **mapping names** for each atom in a lipid. It has been designed to unambiguously refer to each atom in a lipid starting from the 3 carbons in the glycerol (names `M_G1_M`, `M_G2_M` and `M_G3_M`). The second column contains atom names which are found in a pdb structure and are thus force field dependent.
 
-The .def file looks like this :
+The def file looks like this :
 
 ```
 beta1 POPC CD H1D
@@ -24,7 +24,7 @@ alpha2 POPC CE H2E
 [...]
 ```
 
-Each line contains the information for a given hydrogen. The first column is the **generic name** of each H in the lipid. The second column is the lipid name. The third column is the pdb name to which the hydrogen is bonded. The fourth column is the pdb name of the hydrogen.
+Each line contains the information for a given hydrogen. The first column is the **generic name** of each H in the lipid. The second column is the lipid name. The third column is the pdb name of the carbon to which the hydrogen is bonded. The fourth column is the pdb name of the hydrogen.
 
 ## Requirements
 
@@ -65,9 +65,14 @@ The program also needs a file `lipids_info.py` which is used as a module. This l
 ```
 python ./autoLipMap.py --pdb 1POPC_charmm36.pdb -l POPC \
     -om automatic_mappingPOPCcharmm36.txt \
+    -od automatic_POPCcharmm36.def
+```
+
+```
+python ./autoLipMap.py --pdb 1POPC_charmm36.pdb -l POPC \
+    -om automatic_mappingPOPCcharmm36.txt \
     -od automatic_POPCcharmm36.def \
     --graph
-
 ```
 
 The `--graph` is optional. If on, autoLipMap generates graph pictures using matplotlib and networkx (see below). Note, it is possible to zoom in on different regions of the generated graph.
@@ -82,7 +87,7 @@ Difficult to see something, but if we zoom in on the glycerol region it gets cle
 
 ![](mapping_graph_zoomed.png)
 
-Then, autoLipMap reads a PDB file with only one lipid (including all hydrogens) and builds a graph of the molecule. Graph nodes are now labeled according to atom names in the pdb and graph edges correspond to chemical bonds. Let's call this graph *pdb_graph*. In the following picture you can get an idea :
+Then, autoLipMap reads a PDB file with only one lipid (including all hydrogens) and builds a graph of the molecule based on distances between atoms. Graph nodes are now labeled according to atom names in the pdb and graph edges correspond to chemical bonds. Let's call this graph *pdb_graph*. In the following picture you can get an idea :
 
 ![](pdb_graph.png)
 
@@ -90,14 +95,14 @@ Again, if we zoom in on the glycerol region it gets clearer:
 
 ![](pdb_graph_zoomed.png)
 
-Then, using [graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism), autoLipMap can check if the mapping and pdb graphs match and deduce the mapping between mapping names and pdb names. With this information, it writes a mapping file and a def file.
+Then, using [graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism), autoLipMap can check if the mapping graph and pdb graph match. If they do, autoLipMap deduces the mapping between mapping names and pdb names (in the form of a python dictionnary `{"mapping_name_atom1": "pdb_name_atom1", "mapping_name_atom2": "pdb_name_atom2", [...]}`). With this information, it writes a mapping file and a def file.
 
-All graph features and algorithms come from the [networkx module](https://networkx.github.io/).
+All graph construction, handling and representation are possible thanks to the very useful [networkx module](https://networkx.github.io/).
 
 ## Known issues
 
-- So far the different Hs of each CH2 are not classified in pro-R / pro-S. Implementing this feature is planned.
-- Sometimes there are ambiguities which autoLipMap cannot solve. For example, in a CH3, it cannot distinguish which H is H1, H2 or H3. Same things for the two oxygens connected to the phoshorous (which are not part of the main chain). Same thing for each CH3 group of the choline. In general, it doesn't really matter since we are not very interested in those hydrogens (or atoms).
+- So far the different Hs of each CH2 are not classified as pro-R / pro-S. Implemention of this feature is planned.
+- Sometimes there are ambiguities that autoLipMap cannot solve. For example, in a CH3, it cannot distinguish which H is H1, H2 or H3. Same things for the two oxygens connected to the phoshorous (which are not part of the main chain). Same thing for each CH3 group of the choline. In general, it doesn't really matter since we are not very interested in those hydrogens (or atoms).
 - In the mapping file, the last lines (containing info on #Water and #Whole molecules) cannot be guessed automatically by autoLipMap. Thus, one should edit and fix them manually for now. Here is an example:
 
 ```
