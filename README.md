@@ -12,7 +12,7 @@ M_G1O1_M      O33
 [...]
 ```
 
-The first column contains the **mapping names** for each atom in a lipid. It has been designed to unambiguously refer to each atom in a lipid starting from the 3 carbons in the glycerol (names `M_G1_M`, `M_G2_M` and `M_G3_M`). The second column contains atom names which are found in a pdb structure and are thus force field dependent.
+The first column contains the **mapping names** for each atom in a lipid. It has been designed to unambiguously refer to each atom in a lipid starting from the 3 carbons in the glycerol (names `M_G1_M`, `M_G2_M` and `M_G3_M`). The second column contains atom names which are found in a pdb structure - called **pdb names** in this document - and are thus force field dependent.
 
 The def file looks like this :
 
@@ -24,7 +24,7 @@ alpha2 POPC CE H2E
 [...]
 ```
 
-Each line contains the information for a given hydrogen. The first column is the **generic name** of each H in the lipid. The second column is the lipid name. The third column is the pdb name of the carbon to which the hydrogen is bonded. The fourth column is the pdb name of the hydrogen.
+Each line contains the information for a given hydrogen. The first column is the **generic name** of each H in the lipid. The second column is the lipid name. The third column is the **pdb name** of the carbon to which the hydrogen is bonded. The fourth column is the **pdb name** of the hydrogen.
 
 ## Requirements
 
@@ -32,10 +32,10 @@ Python >= 3.6 is mandatory for running buildH.
 
 autoLipMap  is written in Python 3 and need the following modules :
 
-- argparse
-- pandas
-- networkx
-- matplotlib
+- argparse (part of the built-in modules in Python 3)
+- [pandas](https://pandas.pydata.org/)
+- [networkx](https://networkx.github.io/)
+- [matplotlib](https://matplotlib.org/)
 
 ## Usage
 
@@ -58,7 +58,7 @@ optional arguments:
   --graph               Draw the graphs.
 ```
 
-The program also needs a file `lipids_info.py` which is used as a module. This latter contains differents lists and dictionnaries for different lipids (so far only POPC is there). It may be changed by the user to add a new lipid.
+The program also needs a file `lipids_info.py` which is used as a module (present in this repo). This latter contains differents lists and dictionnaries for different lipids (so far only POPC is there). It may be changed by the user to add a new lipid.
 
 ## Example
 
@@ -87,7 +87,7 @@ Difficult to see something, but if we zoom in on the glycerol region it gets cle
 
 ![](mapping_graph_zoomed.png)
 
-Then, autoLipMap reads a PDB file with only one lipid (including all hydrogens) and builds a graph of the molecule based on distances between atoms. Graph nodes are now labeled according to atom names in the pdb and graph edges correspond to chemical bonds. Let's call this graph *pdb_graph*. In the following picture you can get an idea :
+Then, autoLipMap reads a PDB file with only one lipid (including all hydrogens) and builds a graph of the molecule based on distances between atoms. Graph nodes are now labeled according to atom names in the pdb and graph edges correspond to chemical bonds. Let's call this graph *pdb_graph*. In the following picture you can get an idea of how it looks like:
 
 ![](pdb_graph.png)
 
@@ -95,7 +95,7 @@ Again, if we zoom in on the glycerol region it gets clearer:
 
 ![](pdb_graph_zoomed.png)
 
-Then, using [graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism), autoLipMap can check if the mapping graph and pdb graph match. If they do, autoLipMap deduces the mapping between mapping names and pdb names (in the form of a python dictionnary `{"mapping_name_atom1": "pdb_name_atom1", "mapping_name_atom2": "pdb_name_atom2", [...]}`). With this information, it writes a mapping file and a def file.
+Eventually, using [graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism), autoLipMap can check if the *mapping_graph* and *pdb_graph* match. If they do, autoLipMap deduces the mapping between mapping names and pdb names (in the form of a python dictionnary `{"mapping_name_atom1": "pdb_name_atom1", "mapping_name_atom2": "pdb_name_atom2", [...]}`). With this information, it writes a mapping file and a def file.
 
 All graph construction, handling and representation are possible thanks to the very useful [networkx module](https://networkx.github.io/).
 
