@@ -30,12 +30,18 @@ Each line contains the information for a given hydrogen. The first column is the
 
 Python >= 3.6 is mandatory for running buildH.
 
-autoLipMap  is written in Python 3 and need the following modules :
+autoLipMap  is written in Python 3 and needs the following modules:
 
-- argparse (part of the built-in modules in Python 3)
+- [argparse](https://docs.python.org/3/library/argparse.html) (part of the built-in modules in Python 3)
 - [pandas](https://pandas.pydata.org/)
 - [networkx](https://networkx.github.io/)
 - [matplotlib](https://matplotlib.org/)
+
+If you use conda (which I highly recommend :wink:), this simple command line should do the trick:
+
+```
+conda install pandas networkx matplotlib
+```
 
 ## Usage
 
