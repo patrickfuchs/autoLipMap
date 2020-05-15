@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import lipids_info
 
 # This is the distance below which a bond is defined between any 2 atoms.
-MAXBOND = 1.8 # in A
+MAXBOND = 1.7 # in A
 
 
 def pdb2pandasdf(pdb_filename):
