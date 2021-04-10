@@ -51,8 +51,12 @@ def calc_distance(x1, y1, z1, x2, y2, z2):
     return ((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)**.5
 
 
-def build_graph_from_pdb(df, theoretical_nb_nodes, theoretical_nb_edges):
+def build_graph_from_pdb(df, theoretical_nb_nodes=None, theoretical_nb_edges=None):
     """Reads a pdb and builds a graph of the lipid molecule.
+
+    If `theoretical_nb_nodes` and / or `theoretical_nb_edges` are given, the function
+    checks whether the graph contains `theoretical_nb_nodes` nodes and  
+    `theoretical_nb_edges` edges.
 
     Arguments
     ---------
@@ -61,8 +65,10 @@ def build_graph_from_pdb(df, theoretical_nb_nodes, theoretical_nb_edges):
         "resname", "resnum", "x", "y", "z"
     theoretical_nb_nodes : int
         Number of nodes of the graph built from mapping names.
+        If None, no check is done.
     theoretical_nb_edges : int
         Number of edges of the graph built from mapping names.
+        If None, no check is done.
 
     Returns
     -------
@@ -80,11 +86,12 @@ def build_graph_from_pdb(df, theoretical_nb_nodes, theoretical_nb_edges):
         else:
             G.add_node(atname)
     # Check nb of nodes OK.
-    if G.number_of_nodes() != theoretical_nb_nodes:
-        #raise(Exception, f"Actual POPC has {G.number_of_nodes()} atoms, while "
-        #      "it should have {theoretical_nb_nodes}")
-        exit(f"Actual POPC has {G.number_of_nodes()} atoms, while it should "
-             f"have {theoretical_nb_nodes}")
+    if theoretical_nb_nodes:
+        if G.number_of_nodes() != theoretical_nb_nodes:
+            #raise(Exception, f"Actual POPC has {G.number_of_nodes()} atoms, while "
+            #      "it should have {theoretical_nb_nodes}")
+            exit(f"Actual POPC has {G.number_of_nodes()} atoms, while it should "
+                 f"have {theoretical_nb_nodes}")
     # Now create edges for each chemical bond.
     for i in range(G.number_of_nodes()-1):
         for j in range(i+1, G.number_of_nodes()):
@@ -103,9 +110,10 @@ def build_graph_from_pdb(df, theoretical_nb_nodes, theoretical_nb_edges):
                 print(f"Add bond #{G.number_of_edges()} between atom {numi} "
                       f"({namei}) and atom {numj} ({namej})")
     # Check nb of edges OK.
-    if G.number_of_edges() != theoretical_nb_edges:
-        exit(f"Actual POPC has {G.number_of_edges()} bonds, while it should "
-             f"have {theoretical_nb_edges}")
+    if theoretical_nb_edges:
+        if G.number_of_edges() != theoretical_nb_edges:
+            exit(f"Actual POPC has {G.number_of_edges()} bonds, while it should "
+                 f"have {theoretical_nb_edges}")
     print(f"PDB graph has {G.number_of_nodes()} nodes (atoms) and "
           f"{G.number_of_edges()} edges (bonds)")
     return G
