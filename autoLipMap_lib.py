@@ -3,15 +3,13 @@
 TODO: complete docstrings
 """
 
-def gen_buildH_json_lipid(df, G, dic_PN2MN, DEBUG=False):
+def gen_buildH_json_lipid(resname, G, dic_PN2MN, DEBUG=False):
     """Takes a pdb dataframe, a graph with mapping names and a dict PN2MN --> generates a buildH json file.
     """
     jsonf = ""
     jsonfMN = ""
     jsonf += "{\n"
     jsonfMN += "{\n"
-    # Get residue name.
-    resname = df["resname"][0]
     jsonf += f'    "resname": ["{resname}"],\n'
     jsonfMN += f'    "resname": ["{resname}"],\n'
     # Create a list with all carbons names.
@@ -73,12 +71,10 @@ def gen_buildH_json_lipid(df, G, dic_PN2MN, DEBUG=False):
     return jsonf, jsonfMN
 
 
-def gen_buildH_def_file(df, G, basename="cholesterol", DEBUG=False):
+def gen_buildH_def_file(resname, G, basename="cholesterol", DEBUG=False):
     """Takes a pdb dataframe, a graph with mapping names --> generates a buildH def file.
     """
     deff = ""
-    # Get residue name.
-    resname = df["resname"][0]
     # Create a list with all carbons names.
     list_Cnodes = [node for node in G.nodes() if node.startswith("C")]
     # Loop over Carbons.
