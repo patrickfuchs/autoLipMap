@@ -3,7 +3,7 @@
 TODO: complete docstrings
 """
 
-def gen_buildH_json_lipid(df, G, dic_PN2MN):
+def gen_buildH_json_lipid(df, G, dic_PN2MN, DEBUG=False):
     """Takes a pdb dataframe, a graph with mapping names and a dict PN2MN --> generates a buildH json file.
     """
     jsonf = ""
@@ -73,7 +73,7 @@ def gen_buildH_json_lipid(df, G, dic_PN2MN):
     return jsonf, jsonfMN
 
 
-def gen_def_file(df, G, basename="cholesterol"):
+def gen_buildH_def_file(df, G, basename="cholesterol", DEBUG=False):
     """Takes a pdb dataframe, a graph with mapping names --> generates a buildH def file.
     """
     deff = ""
