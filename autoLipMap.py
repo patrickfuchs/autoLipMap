@@ -100,7 +100,7 @@ def build_graph_from_pdb(df, theoretical_nb_nodes=None, theoretical_nb_edges=Non
             numi = df.iloc[i]["atnum"]
             numj = df.iloc[j]["atnum"]
             # If both atoms are H, skip edge creation.
-            if "H" in namei and "H" in namej:
+            if namei.startswith("H") and namej.startswith("H"):
                 continue
             x1, y1, z1 = df.iloc[i][["x", "y", "z"]]
             x2, y2, z2 = df.iloc[j][["x", "y", "z"]]
